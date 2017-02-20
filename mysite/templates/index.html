@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python WebSite</title>
+</head>
+<style>
+    h1 {
+        color: red;
+        font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+        font-size: 32px;
+    }
+</style>
+<body>
+<h1>Hello Python</h1>
+<form action="/index/" method="post">
+    <input type="text" name="username">
+    <input type="password" name="userpwd">
+    <input type="submit" value="submit">
+</form>
+<ul>
+    {% for item in data %}
+        <li>{{ item.username }} --  {{ item.pwd }}</li>
+    {% endfor %}
+</ul>
+
+<script src="/static/scripts/jquery-3.1.1.min.js"></script>
+</body>
+</html>
