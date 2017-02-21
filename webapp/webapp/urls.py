@@ -19,5 +19,9 @@ from djangoapp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/',views.index)
+    url(r'^hello', views.hello, name='hello'),
+    url(r'^article/(\d+)/', views.article, name='article'),
+    url(r'^articles/(\d{2})/(\d{4})/', views.articles, name='articles'),
+    url(r'^block', views.block, name='block'),
+    url('^$', views.index)
 ]

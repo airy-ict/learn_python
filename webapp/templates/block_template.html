@@ -1,0 +1,13 @@
+{% extends "main_template.html" %}
+{% block title %} My Template Page {% endblock %}
+{% block content %}
+
+    <h3>使用模板系统块和扩展标签 </h3>
+    <h1>Hello Django Template Page</h1>
+
+    {% for foo in data %}
+        <h4>{{ foo.username }}</h4>
+    {% endfor %}
+
+{% endblock %}
+
