@@ -1,3 +1,3 @@
-# pythonlearning
+# Python Webapp
 
-##使用 Python Django框架开发 webapp
+## 使用 Python Django框架开发 webapp
