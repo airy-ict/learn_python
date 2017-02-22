@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^article/(\d+)/', views.article, name='article'),
     url(r'^articles/(\d{2})/(\d{4})/', views.articles, name='articles'),
     url(r'^block', views.block, name='block'),
+    url(r'^crudops', views.crudops, name='crudops'),
     url('^$', views.index)
 ]
