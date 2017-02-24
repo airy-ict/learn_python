@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^articles/(\d{2})/(\d{4})/', views.articles, name='articles'),
     url(r'^block', views.block, name='block'),
     url(r'^crudops', views.crudops, name='crudops'),
+    url(r'^simpleemail/(?P<emailto>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/',views.sendSimpleEmail, name='sendSimpleEmail'),
     url('^$', views.index)
 ]
