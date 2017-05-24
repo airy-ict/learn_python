@@ -10,12 +10,7 @@ class query(object):
     def demo(self, year: int) -> list:
 
         try:
-            sql="SELECT MAX(m.CustomerSysNo) ,m.Status, item.ProductSysNo,SUM(item.Quantity) FROM  IPP3.dbo.SO_Master m WITH ( NOLOCK ) " \
-                "INNER JOIN IPP3.dbo.SO_CheckShipping c WITH(NOLOCK) ON c.SOSysNo=m.SysNo " \
-                "LEFT JOIN IPP3.dbo.SO_Item item WITH(NOLOCK) ON item.SOSysNo = m.SysNo " \
-                "LEFT JOIN IPP3.dbo.Product p  WITH(NOLOCK) ON p.SysNo=item.ProductSysNo " \
-                "WHERE c.IsPhoneOrder NOT IN(5,15) AND item.ProductType <>3   AND p.Status>0  AND YEAR(m.OrderDate)="+str(year)+" " \
-                "GROUP BY item.ProductSysNo,m.Status"
+            sql=""
 
             self.conn.execute(sql)
             data = self.conn.fetchall()
@@ -33,11 +28,11 @@ class query(object):
         # if not self.db:
         #    raise(NameError,"没有设置数据库信息")
         self.conn = pymssql.connect(
-            host='10.10.6.115',
-            port="1435",
-            user='bigdatateam',
-            password='Kjt.com',
-            database='IPP3',
+            host='10',
+            port="UTF",
+            user='UTF',
+            password='UTF.com',
+            database='UTF',
             charset='UTF-8')
         cur = self.conn.cursor()
         if not cur:
