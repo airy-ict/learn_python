@@ -6,7 +6,7 @@ def demo(conn):
 
     try:
         cur=conn.cursor()#获取一个游标
-        cur.execute('select idvisit from piwik_log_visit ORDER BY RAND() LIMIT 1000')
+        cur.execute('select id from 10 ORDER BY RAND() LIMIT 1000')
         data=cur.fetchall()
         print(len(data))
         # cur.close()#关闭游标
@@ -21,7 +21,7 @@ def demo(conn):
         """
         # if not self.db:
         #    raise(NameError,"没有设置数据库信息")
-        self.conn = pymysql.connect(host='10.10.6.112',user='bigdatateam',passwd='kjt.com',db='piwik',port=3306,charset='utf8mb4')
+        self.conn = pymysql.connect(host='10',user='10',passwd='10.com',db='10',port=10,charset='utf8mb4')
         cur = self.conn.cursor()
         if not cur:
             raise (NameError, "连接数据库失败")
