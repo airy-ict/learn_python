@@ -145,4 +145,4 @@ if __name__ == '__main__':
     # r = manhattan.calc_manhattan(users["Bill"], users["Sam"])
     # r1 = manhattan.calc_manhattan(users["Bill"], users["Veronica"])
     # print(r, r1)
-    print(m.getrecommend("Sam", 2))
+    print(m.getrecommend("Angelica"))
