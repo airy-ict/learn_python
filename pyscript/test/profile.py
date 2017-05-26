@@ -1,7 +1,6 @@
 from time import time
 import re
 
-
 t = time()
 data = [
     'a', 'b', 'is', 'python', 'jason', 'hello', 'hill', 'with', 'phone',
@@ -21,8 +20,48 @@ data = [
 # s=[x for x in words if len(re.findall(r"^\\(pre|search|list)",x))==0]
 # print(s)
 
-rst="m.kjt.com/product/167244?from=singlemessage&isappinstalled=1"
 
-print(rst.replace("?from=singlemessage&isappinstalled=1",""))
-reg=r"[0-9]+(?=[^0-9]*$)"
-print(re.findall(reg,"m.kjt.com/registertwo/13873150392?ReturnUrl=http://m.kjt.com/product/1106")[0])
+def set_data(data: list):
+    """
+        数据去重
+        :param data: 
+        :return: list
+        """
+    new_list = []
+    if data is None or len(data) == 0:
+        return new_list
+    # 先排序
+    data = [x for x in data if len(x) > 0]
+    sort_data = sorted(data, key=lambda x: x[1])
+    # 商品编号分组
+    group_data = groupby(data, key=lambda x: x[1])
+    indexes = []
+    for n in group_data:
+        indexes.append(str(n[0]))
+    # 合并商品编号重复的数据
+    for sysno in indexes:
+        count = 0.0
+        for d in sort_data:
+            if str(sysno) == str(d[1]):
+                count += d[1]
+        new_list.append((data[0][0], sysno, count))
+    return new_list
+
+
+rst = "m.kjt.com/product/167244?from=singlemessage&isappinstalled=1"
+
+print(rst.replace("?from=singlemessage&isappinstalled=1", ""))
+reg = r"[0-9]+(?=[^0-9]*$)"
+rt = re.findall(
+    reg, "m.kjt.com/registertwo/sd?ReturnUrl=http://m.kjt.com/product/10002")
+print(len(rt))
+
+lc1 = [(1001, 2), (1002, 3), (1003, 3)]
+lc2 = [(1001, 0.1), (1003, 0.2), (1006, 0.3), (1005, 0.2)]
+
+lc1.extend(lc2)
+print(lc1)
+s=[(z,y,1)for  (z,y) in lc2]
+print(s)
+
+
