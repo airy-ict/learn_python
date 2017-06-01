@@ -89,7 +89,7 @@ class manhattan(object):
         """
             计算曼哈顿距离。rating1和rating2参数中存储的数据格式均为				
             {'The	Strokes':	3.0,	'Slightly	Stoopid':	2.5}
-            """
+        """
         distance = 0
         for key in rating1:
             if key in rating2:
@@ -133,10 +133,9 @@ class manhattan(object):
             if not artist in curr_data:
                 recommand_result.append((artist, neare_data[artist]))
         # 根据评分排序
-        result = sorted(
-            recommand_result, key=lambda x: x[1], reverse=True)
+        result = sorted(recommand_result, key=lambda x: x[1], reverse=True)
         if k is not None:
-            result=recommand_result[0:k]
+            result = recommand_result[0:k]
         return result
 
 

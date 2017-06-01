@@ -1,5 +1,6 @@
 from time import time
 import re
+import math
 
 t = time()
 data = [
@@ -54,14 +55,22 @@ print(rst.replace("?from=singlemessage&isappinstalled=1", ""))
 reg = r"[0-9]+(?=[^0-9]*$)"
 rt = re.findall(
     reg, "m.kjt.com/registertwo/sd?ReturnUrl=http://m.kjt.com/product/10002")
-print(len(rt))
-
-lc1 = [(1001, 2), (1002, 3), (1003, 3)]
-lc2 = [(1001, 0.1), (1003, 0.2), (1006, 0.3), (1005, 0.2)]
-
-lc1.extend(lc2)
-print(lc1)
-s=[(z,y,1)for  (z,y) in lc2]
-print(s)
 
 
+# print(math.ceil((155142/1000)))
+
+# lc1 = [(1001, 2), (1002, 3), (1003, 3)]
+
+# for i,e in enumerate(lc1):
+#     print(i,e)
+
+
+# lc2 = [(1001, 0.1), (1003, 0.2), (1006, 0.3), (1005, 0.2)]
+
+# lc1.extend(lc2)
+# print(lc1)
+# s=[(z,y,1)for  (z,y) in lc2]
+# print(s)
+
+word=  123 
+print(word > 2147483647)
