@@ -3,6 +3,8 @@ import re
 import math
 from itertools import *
 import pandas as pd
+from collections import Counter
+from operator import itemgetter
 
 t = time()
 data = [
@@ -50,7 +52,6 @@ data = [
 #         new_list.append((data[0][0], sysno, count))
 #     return new_list
 
-
 # rst = "m.kjt.com/product/167244?from=singlemessage&isappinstalled=1"
 
 # print(rst.replace("?from=singlemessage&isappinstalled=1", ""))
@@ -58,14 +59,12 @@ data = [
 # rt = re.findall(
 #     reg, "m.kjt.com/registertwo/sd?ReturnUrl=http://m.kjt.com/product/10002")
 
-
 # # print(math.ceil((155142/1000)))
 
 # lc1 = [(1001, 2), (1002, 3), (1003, 3)]
 
 # for i,e in enumerate(lc1):
 #     print(i,e)
-
 
 # lc2 = [(1001, 0.1), (1003, 0.2), (1006, 0.3), (1005, 0.2)]
 
@@ -77,20 +76,32 @@ data = [
 # word=  123 
 # print(word > 2147483647)
 
-friends = [(1001,"123",1,3),(1001,"100",1,2),(1001,"101",3,2),(1001,"102",5,3),(1001,"101",5,1)]
+# friends = [(1001,"123",1,3),(1001,"100",1,2),(1001,"101",3,2),(1001,"102",5,3),(1001,"101",5,1)]
 
-df= pd.DataFrame(friends,index=None,columns=["userId", "productSysNo", "status", "qty"])
-df_visit=df.groupby(["productSysNo","status"],as_index=False).count()
-print(df_visit)
-result=[]
-for (productSysNo, customerSysNo,status,  qty) in df_visit.itertuples(index=False):
-    g_result= [ f for f in friends if productSysNo==f[1]]
-    print(g_result)
-    rq=0
-    for (u,p,s,q) in g_result:
-        rq+=q
-    result.append((g_result[0][0],g_result[0][1],rq))
+# df= pd.DataFrame(friends,index=None,columns=["userId", "productSysNo", "status", "qty"])
+# df_visit=df.groupby(["productSysNo","status"],as_index=False).count()
+# print(df_visit)
+# result=[]
+# for (productSysNo, customerSysNo,status,  qty) in df_visit.itertuples(index=False):
+#     g_result= [ f for f in friends if productSysNo==f[1]]
+#     print(g_result)
+#     rq=0
+#     for (u,p,s,q) in g_result:
+#         rq+=q
+#     result.append((g_result[0][0],g_result[0][1],rq))
 
+# print(result)
 
-print(result)
+things = [(1001, 10001, 1), (1003, 10001, 1), (1001, 10001, 1), (1002, 10001, 1),
+          (1002, 10001, 1), (1004, 10001, 1)]
+# 必须要他么的先排序，不然分组不出来
+things=sorted(things,key=lambda x:x[0])  
+for key, items in groupby(things, itemgetter(0)):
+    print(key)
+    for subitem in items:
+        print(subitem)
 
+# df = pd.DataFrame(thingsa, index=None, columns=["uid", "pid", "count"])
+# df_group = df.groupby("pid", as_index=False)["uid", "count"].count()
+
+# print(df_group)
