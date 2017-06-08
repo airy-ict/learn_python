@@ -1,6 +1,8 @@
 from time import time
 import re
 import math
+from itertools import *
+import pandas as pd
 
 t = time()
 data = [
@@ -21,43 +23,43 @@ data = [
 # s=[x for x in words if len(re.findall(r"^\\(pre|search|list)",x))==0]
 # print(s)
 
-
-def set_data(data: list):
-    """
-        数据去重
-        :param data: 
-        :return: list
-        """
-    new_list = []
-    if data is None or len(data) == 0:
-        return new_list
-    # 先排序
-    data = [x for x in data if len(x) > 0]
-    sort_data = sorted(data, key=lambda x: x[1])
-    # 商品编号分组
-    group_data = groupby(data, key=lambda x: x[1])
-    indexes = []
-    for n in group_data:
-        indexes.append(str(n[0]))
-    # 合并商品编号重复的数据
-    for sysno in indexes:
-        count = 0.0
-        for d in sort_data:
-            if str(sysno) == str(d[1]):
-                count += d[1]
-        new_list.append((data[0][0], sysno, count))
-    return new_list
-
-
-rst = "m.kjt.com/product/167244?from=singlemessage&isappinstalled=1"
-
-print(rst.replace("?from=singlemessage&isappinstalled=1", ""))
-reg = r"[0-9]+(?=[^0-9]*$)"
-rt = re.findall(
-    reg, "m.kjt.com/registertwo/sd?ReturnUrl=http://m.kjt.com/product/10002")
+# df = pd.read_csv(name, encoding="utf-8")
+# def set_data(data: list):
+#     """
+#         数据去重
+#         :param data: 
+#         :return: list
+#         """
+#     new_list = []
+#     if data is None or len(data) == 0:
+#         return new_list
+#     # 先排序
+#     data = [x for x in data if len(x) > 0]
+#     sort_data = sorted(data, key=lambda x: x[1])
+#     # 商品编号分组
+#     group_data = groupby(data, key=lambda x: x[1])
+#     indexes = []
+#     for n in group_data:
+#         indexes.append(str(n[0]))
+#     # 合并商品编号重复的数据
+#     for sysno in indexes:
+#         count = 0.0
+#         for d in sort_data:
+#             if str(sysno) == str(d[1]):
+#                 count += d[1]
+#         new_list.append((data[0][0], sysno, count))
+#     return new_list
 
 
-# print(math.ceil((155142/1000)))
+# rst = "m.kjt.com/product/167244?from=singlemessage&isappinstalled=1"
+
+# print(rst.replace("?from=singlemessage&isappinstalled=1", ""))
+# reg = r"[0-9]+(?=[^0-9]*$)"
+# rt = re.findall(
+#     reg, "m.kjt.com/registertwo/sd?ReturnUrl=http://m.kjt.com/product/10002")
+
+
+# # print(math.ceil((155142/1000)))
 
 # lc1 = [(1001, 2), (1002, 3), (1003, 3)]
 
@@ -72,5 +74,23 @@ rt = re.findall(
 # s=[(z,y,1)for  (z,y) in lc2]
 # print(s)
 
-word=  123 
-print(word > 2147483647)
+# word=  123 
+# print(word > 2147483647)
+
+friends = [(1001,"123",1,3),(1001,"100",1,2),(1001,"101",3,2),(1001,"102",5,3),(1001,"101",5,1)]
+
+df= pd.DataFrame(friends,index=None,columns=["userId", "productSysNo", "status", "qty"])
+df_visit=df.groupby(["productSysNo","status"],as_index=False).count()
+print(df_visit)
+result=[]
+for (productSysNo, customerSysNo,status,  qty) in df_visit.itertuples(index=False):
+    g_result= [ f for f in friends if productSysNo==f[1]]
+    print(g_result)
+    rq=0
+    for (u,p,s,q) in g_result:
+        rq+=q
+    result.append((g_result[0][0],g_result[0][1],rq))
+
+
+print(result)
+

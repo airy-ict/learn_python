@@ -4,6 +4,7 @@ from djangoapp.models import Dreamreal, Online
 
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from webapp.tasks import do_something
 
 # Create your views here.
 user_list = [
@@ -123,3 +124,4 @@ def crudops(request):
 def sendSimpleEmail(request,emailto):
     res = send_mail("hello paul", "comment tu vas?", "paul@yiibai.com", [emailto])
     return HttpResponse('%s' % res)
+
