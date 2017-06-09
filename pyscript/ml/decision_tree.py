@@ -80,6 +80,8 @@ def main():
     result = RF.predict(x_test)
     print(x_test)
     print(result)
+    # predict_proba返回的是一个n行k列的数组，第i行第j列上的数值是模型预测第i个预测样本的标签为j的概率。所以每一行的和应该等于1
+    print(RF.predict_proba(x_test))
 
 
 if __name__ == '__main__':
