@@ -6,6 +6,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.externals import joblib
+import os
 
 
 def main():
@@ -67,16 +68,19 @@ def main():
     print("score", dtcf.score(x_train, y_train))
 
     print(classification_report(y, answer, target_names=['thin', 'fat']))
-    
+
+    curr_path = os.getcwd()
+    model_path = curr_path + "\models\dtcf.model"
     # 保存模型
-    joblib.dump(dtcf,'dtcf.model')
+    joblib.dump(dtcf, model_path, compress=0)
     # ＃加载模型
-    RF=joblib.load('dtcf.model')
+    RF = joblib.load(model_path)
 
     # 应用模型进行预测  测试集测试
-    result=RF.predict(x_test)
+    result = RF.predict(x_test)
     print(x_test)
     print(result)
+
 
 if __name__ == '__main__':
     main()
