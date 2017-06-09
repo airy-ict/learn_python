@@ -9,9 +9,17 @@ from sklearn import linear_model
 
 # 机器学习中的预测问题通常分为2类：回归与分类。
 # 简单的说回归就是预测数值，而分类是给数据打上标签归类。
+
+# arange 根据start与stop指定的范围以及step设定的步长，生成一个 ndarray
 x = np.arange(0, 1, 0.002)
+
+# scipy.stats.norm.rvs正态分布
+# （1）作用：构造正态分布的数据
+# （2）函数：scipy.stats.norm.rvs(size=100,loc=0,scal=1) 
+# scipy.norm正态分布模块的随机变量函数rvs，size=100是样本大小，loc＝0是均值，scal=1是标准差
 y = norm.rvs(loc=0, size=500, scale=0.1)
 y = y + x**2
+# scatter 散点图
 plt.scatter(x, y)
 plt.show()
 
