@@ -92,16 +92,26 @@ data = [
 
 # print(result)
 
-things = [(1001, 10001, 1), (1003, 10001, 1), (1001, 10001, 1), (1002, 10001, 1),
-          (1002, 10001, 1), (1004, 10001, 1)]
-# 必须要他么的先排序，不然分组不出来
-things=sorted(things,key=lambda x:x[0])  
-for key, items in groupby(things, itemgetter(0)):
-    print(key)
-    for subitem in items:
-        print(subitem)
+things = [(1001, 10001, 1), (1003, 10001, 1), (1001, 10001, 1),
+          (1002, 10001, 1), (1002, 10001, 1), (1004, 10001, 1)]
+# # 必须要他么的先排序，不然分组不出来
+# things=sorted(things,key=lambda x:x[0])  
+# for key, items in groupby(things, itemgetter(0)):
+#     print(key)
+#     for subitem in items:
+#         print(subitem)
 
 # df = pd.DataFrame(thingsa, index=None, columns=["uid", "pid", "count"])
 # df_group = df.groupby("pid", as_index=False)["uid", "count"].count()
 
 # print(df_group)
+somedata = [(1001, 10001, 2), (1001, 10002, 2), (1001, 10001, 2), (
+    1001, 10003, 0.5), (1001, 10001, 2), (1001, 10004, 1), (1001, 10001, 2)]
+somedata = sorted(somedata, key=lambda x: x[1])
+for key, items in groupby(somedata, lambda x: x[1]):
+    print(key)
+    rc=0
+    for (u,p,c) in items:
+        print((u,p,c))
+        rc+=c
+    print(somedata[0][0],key, rc)
