@@ -51,7 +51,8 @@ def main():
     print("predict_proba", preps)
 
     # 准确率和召回率
-    precision, recall, thresholds = precision_recall_curve(y_train, clf.predict(x_train))
+    precision, recall, thresholds = precision_recall_curve(
+        y_train, clf.predict(x_train))
 
     # 例子：
     # 某池塘有1400条鲤鱼，300只虾，300只鳖。现在以捕鲤鱼为目的。撒一大网，逮着了700条鲤鱼，200只虾，100只鳖。那么，这些指标分别如下：
@@ -64,13 +65,14 @@ def main():
     # F值 = 70% * 100% * 2 / (70% + 100%) = 82.35%        
     # 正确率是评估捕获的成果中目标成果所占得比例；召回率，顾名思义，就是从关注领域中，召回目标类别的比例；而F值，则是综合这二者指标的评估指标，用于综合反映整体的指标。
     answer = clf.predict_proba(x)[:, 1]
+    y_pred=clf.predict(x_test)
     # print(answer)
-    print("score", clf.score(x_train, y_train))
+    print("平均值", np.mean(answer == y_pred))
 
     print(classification_report(y, answer, target_names=['thin', 'fat']))
 
     curr_path = os.getcwd()
-    model_path = curr_path + "\models\dtcf.model"
+    model_path = curr_path + "\models\clf_dsccision.model"
     # 保存模型
     joblib.dump(clf, model_path, compress=0)
     # ＃加载模型
