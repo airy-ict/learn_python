@@ -21,6 +21,7 @@ def read_file():
     print('用户数量 :' + str(n_users) + ', 电影数量 :' + str(n_items))
 
     t = df[:int(len(df)*0.2)]
+    
     # 将样本分为训练集与测试集，验证集占25%
     # 根据测试样本的比例(test_size)将数据混洗并分割成两个数据集。
     train, test, train_data, test_data = train_test_split(df,t,test_size=0.25)

@@ -8,6 +8,7 @@ class item_bsedCF:
     def __init__(self, train_file):
         self.train_file = train_file
         self.readData()
+        
 
     def readData(self):
         # 读取文件，并生成用户-物品的评分表和测试集  

@@ -8,7 +8,7 @@ def multipl(a, b):
         sumofab += temp
     return sumofab
 
-
+ 
 def corrcoef(x, y):
     n = len(x)
     # 求和

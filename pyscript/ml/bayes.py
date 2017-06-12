@@ -33,7 +33,7 @@ def main():
     x_train = count_vec.fit_transform(x_train)
     x_test = count_vec.transform(x_test)
 
-    # 分类器
+    # 分类器   
     clf = MultinomialNB().fit(x_train, y_train)
     doc_pred = clf.predict(x_test)
 

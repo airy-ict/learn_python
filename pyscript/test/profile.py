@@ -13,6 +13,8 @@ data = [
     'bana', 'dd', 'wrd'
 ]
 
+
+
 # dicr=[{dic[id]:({dp:dr})}  for (id,p,r) in users for (did,dp,dr) in users if id==did]
 # print(dic)
 
