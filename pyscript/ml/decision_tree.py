@@ -32,26 +32,26 @@ def main():
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
     # 使用分类器分类 使用信息熵作为划分标准
-    dtcf = tree.DecisionTreeClassifier(criterion='entropy')
+    clf = tree.DecisionTreeClassifier(criterion='entropy')
 
     # model.fit(): 实际上就是训练，对于监督模型来说是 fit(X, y)，对于非监督模型是 fit(X)。
-    dtcf.fit(x_train, y_train)
+    clf.fit(x_train, y_train)
     # 系数反映每个特征的影响力。越大表示该特征在分类中起到的作用越大
     # 本例中，身高的权重为0.25，体重为0.75  
 
-    print("特征的影响力", dtcf.feature_importances_)
+    print("特征的影响力", clf.feature_importances_)
 
-    pre_result = dtcf.predict(x_train)
+    pre_result = clf.predict(x)
     # print(x_train)
     print(pre_result)
     # print(y_train)
     # print(np.mean(pre_result == y_train))
     print("predict", pre_result)
-    preps = dtcf.predict_proba(x_train)
+    preps = clf.predict_proba(x_train)
     print("predict_proba", preps)
 
     # 准确率和召回率
-    precision, recall, thresholds = precision_recall_curve(y_train, pre_result)
+    precision, recall, thresholds = precision_recall_curve(y_train, clf.predict(x_train))
 
     # 例子：
     # 某池塘有1400条鲤鱼，300只虾，300只鳖。现在以捕鲤鱼为目的。撒一大网，逮着了700条鲤鱼，200只虾，100只鳖。那么，这些指标分别如下：
@@ -63,16 +63,16 @@ def main():
     # 召回率 = 1400 / 1400 = 100%
     # F值 = 70% * 100% * 2 / (70% + 100%) = 82.35%        
     # 正确率是评估捕获的成果中目标成果所占得比例；召回率，顾名思义，就是从关注领域中，召回目标类别的比例；而F值，则是综合这二者指标的评估指标，用于综合反映整体的指标。
-    answer = dtcf.predict_proba(x)[:, 1]
+    answer = clf.predict_proba(x)[:, 1]
     # print(answer)
-    print("score", dtcf.score(x_train, y_train))
+    print("score", clf.score(x_train, y_train))
 
     print(classification_report(y, answer, target_names=['thin', 'fat']))
 
     curr_path = os.getcwd()
     model_path = curr_path + "\models\dtcf.model"
     # 保存模型
-    joblib.dump(dtcf, model_path, compress=0)
+    joblib.dump(clf, model_path, compress=0)
     # ＃加载模型
     RF = joblib.load(model_path)
 
