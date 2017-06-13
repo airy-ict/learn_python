@@ -36,9 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djangoapp',
-    'djcelery',
-    'kombu.transport.django',
+    'djangoapp'
 ]
 
 MIDDLEWARE = [
@@ -122,8 +120,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-djcelery.setup_loader()
-BROKER_URL = 'django://'
-# BROKER_URL = 'redis://:password@localhost:6379/0'
-# BACKEND_URL = 'redis://:password@localhost:6379/1'
