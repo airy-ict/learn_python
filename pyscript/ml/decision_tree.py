@@ -65,9 +65,11 @@ def main():
     # F值 = 70% * 100% * 2 / (70% + 100%) = 82.35%        
     # 正确率是评估捕获的成果中目标成果所占得比例；召回率，顾名思义，就是从关注领域中，召回目标类别的比例；而F值，则是综合这二者指标的评估指标，用于综合反映整体的指标。
     answer = clf.predict_proba(x)[:, 1]
-    y_pred=clf.predict(x_test)
+    # y_pred=clf.predict(x_test)
     # print(answer)
-    print("平均值", np.mean(answer == y_pred))
+    score = clf.score(x_test, y_test)
+    # print("平均值", np.mean(answer == y_pred))
+    print("平均值", score)
 
     print(classification_report(y, answer, target_names=['thin', 'fat']))
 

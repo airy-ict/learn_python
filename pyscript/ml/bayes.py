@@ -35,9 +35,13 @@ def main():
 
     # 分类器   
     clf = MultinomialNB().fit(x_train, y_train)
-    doc_pred = clf.predict(x_test)
+    # doc_pred = clf.predict(x_test)
+    # print("平均值：", np.mean(doc_pred == y_test))
+    # 可用 clf.score 代替以上均值
+    
+    score = clf.score(x_test, y_test)
+    print("score:",score)
 
-    print("平均值：", np.mean(doc_pred == y_test))
     # 准确率  召回率
     precision, recall, thresholds = precision_recall_curve(
         y_test, clf.predict(x_test))
