@@ -138,5 +138,7 @@ for t in range(d_matrix.shape[0]):
     print(sorted(d_matrix[t])[-4:])
 
 print("\n")
-print(d_matrix[2][-4:])
-print(d_matrix[2][0:4])
+print(d_matrix[0][-4:])         # 第1行后四个数字
+print(d_matrix[1][-4:])         # 第2行后四个数字
+print(d_matrix[2][-4:])         # 第3行后四个数字
+print(d_matrix[2][0:4])         # 第2行前四个数字
