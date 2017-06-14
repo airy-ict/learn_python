@@ -5,6 +5,7 @@ from itertools import *
 import pandas as pd
 from collections import Counter
 from operator import itemgetter
+import numpy as np
 
 t = time()
 data = [
@@ -110,11 +111,32 @@ things = [(1001, 10001, 1), (1003, 10001, 1), (1001, 10001, 1),
 somedata = [(1001, 10001, 2), (1001, 10002, 2), (1001, 10001, 2), (
     1001, 10003, 0.5), (1001, 10001, 2), (1001, 10004, 1), (1001, 10001, 2)]
 somedata = sorted(somedata, key=lambda x: x[1])
-for key, items in groupby(somedata, lambda x: x[1]):
-    print(key)
-    rc=0
-    for (u,p,c) in items:
-        print((u,p,c))
-        rc+=c
-    print(somedata[0][0],key, rc)
+# for key, items in groupby(somedata, lambda x: x[1]):
+#     print(key)
+#     rc=0
+#     for (u,p,c) in items:
+#         print((u,p,c))
+#         rc+=c
+#     print(somedata[0][0],key, rc)
 
+# a=np.zeros((12,12),dtype='int32')
+# print(a)
+# print(a.shape[0])
+# print(a.shape[1])
+# print(a[-10:])
+
+d = [[1, 2, 3,4,1,12], [4, 6,5, 6,2,23], [7, 9, 8,9,2,24], [7, 8, 9,9,4,32], [11, 23,12,13,5,32],
+     [21,23, 14,6,1,15], [16,10, 24,36,8,54]]
+d_matrix=np.array(d)
+print(d_matrix)
+
+# print(d_matrix.shape[0])  # 行
+# print(d_matrix.shape[1])  # 列
+print("\n")
+
+for t in range(d_matrix.shape[0]):
+    print(sorted(d_matrix[t])[-4:])
+
+print("\n")
+print(d_matrix[2][-4:])
+print(d_matrix[2][0:4])

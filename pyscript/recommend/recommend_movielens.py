@@ -38,6 +38,13 @@ def read_file():
     # 相似性矩阵
     user_similar = pairwise_distances(train_data_matrix, metric="cosine")
     item_similar = pairwise_distances(train_data_matrix.T, metric="cosine")
+    print(item_similar.shape[0])
+    print(item_similar[1][1:11])
+    print(item_similar[2][1:11])
+    print(item_similar[3][1:11])
+    for t in range(item_similar.shape[1]):  
+        item =sorted(item_similar[t])[-10:]  
+        # print(t,item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9])  
 
     return (train_data_matrix, test_data_matrix, user_similar, item_similar)
 
@@ -76,8 +83,6 @@ def predict_out(train_data_matrix, test_data_matrix, u_similar, i_similar):
     # user和item预测
     user_prediction = predict(train_data_matrix, u_similar, type='user')
     item_prediction = predict(train_data_matrix, i_similar, type='item')
-    for t in user_prediction[1:5]:
-        print(t)
 
     print('基于用户 CF RMSE: ' + str(rmse(user_prediction, test_data_matrix)))
     print('基于电影 CF RMSe: ' + str(rmse(item_prediction, test_data_matrix)))
