@@ -10,6 +10,7 @@ class Dreamreal(models.Model):
     phone_number = models.IntegerField()
     online = models.ForeignKey('Online')
 
+    # 表面
     class Meta:
         db_table = "dreamreal"
 
