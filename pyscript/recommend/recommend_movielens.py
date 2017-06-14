@@ -12,23 +12,21 @@ from math import sqrt
 
 def read_file():
     header = ['user_id', 'item_id', 'rating', 'timestamp']
-    df = pd.read_csv("./ml/data/ml-latest-small/ratings.csv", sep='\t', names=header)
-    print(df.user_id)
+    df = pd.read_csv('data\\ml-100k\\u.data', sep='\t', names=header)
+    # print(df.user_id)
     # 去重之后得到一个元祖，分别表示行与列,大小分别为943与1682
     n_users = df.user_id.unique().shape[0]
     n_items = df.item_id.unique().shape[0]
 
     print('用户数量 :' + str(n_users) + ', 电影数量 :' + str(n_items))
 
-    t = df[:int(len(df)*0.2)]
-    
     # 将样本分为训练集与测试集，验证集占25%
     # 根据测试样本的比例(test_size)将数据混洗并分割成两个数据集。
-    train, test, train_data, test_data = train_test_split(df,t,test_size=0.25)
+    train_data, test_data =train_test_split(df, test_size=0.25)
 
     # 创建两个矩阵  训练矩阵  验证矩阵
     train_data_matrix = np.zeros((n_users, n_items))
-    for line in train_data.itertuples():
+    for line in test_data.itertuples():
         train_data_matrix[line[1] - 1, line[2] - 1] = line[3]
 
     test_data_matrix = np.zeros((n_users, n_items))
@@ -59,7 +57,8 @@ def predict(rating, similar, type='user'):
     if type == 'user':
         mean_user_rating = rating.mean(axis=1)
         rating_diff = (rating - mean_user_rating[:, np.newaxis])
-        pred = mean_user_rating[:, np.newaxis] + similar.dot(rating_diff) / np.array([np.abs(similar).sum(axis=1)]).T
+        pred = mean_user_rating[:, np.newaxis] + similar.dot(
+            rating_diff) / np.array([np.abs(similar).sum(axis=1)]).T
     elif type == 'item':
         pred = rating.dot(similar) / np.array([np.abs(similar).sum(axis=1)])
     return pred
@@ -77,6 +76,8 @@ def predict_out(train_data_matrix, test_data_matrix, u_similar, i_similar):
     # user和item预测
     user_prediction = predict(train_data_matrix, u_similar, type='user')
     item_prediction = predict(train_data_matrix, i_similar, type='item')
+    for t in user_prediction[1:5]:
+        print(t)
 
     print('基于用户 CF RMSE: ' + str(rmse(user_prediction, test_data_matrix)))
     print('基于电影 CF RMSe: ' + str(rmse(item_prediction, test_data_matrix)))
@@ -96,12 +97,14 @@ def rmse(prediction, ground_truth):
 
 
 def recommend_result():
-    train_data_matrix, test_data_matrix, user_similar, item_similar = read_file()
+    train_data_matrix, test_data_matrix, user_similar, item_similar = read_file(
+    )
 
     print('用户相似性矩阵 :', user_similar.shape)
     print('电影相似性矩阵 :', item_similar.shape)
-
-    predict_out(train_data_matrix, test_data_matrix, user_similar, item_similar)
+ 
+    predict_out(train_data_matrix, test_data_matrix, user_similar,
+                item_similar)
 
 
 if __name__ == '__main__':

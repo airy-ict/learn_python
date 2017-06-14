@@ -29,7 +29,8 @@ class recommend:
 
         #  todense 转换稠密矩阵
         #  csc_matrix 按col列压缩
-        self.y = (sparse.csc_matrix((self.data[:, 2], x_p.T),dtype=np.float64))[:, :].todense()
+        self.y = (sparse.csc_matrix(
+            (self.data[:, 2], x_p.T), dtype=np.float64))[:, :].todense()
 
         self.nUser, self.nItem = self.y.shape
 
@@ -42,9 +43,10 @@ class recommend:
         # test_size：样本占比，如果是整数的话就是样本的数量 test_size=0.2 # 避免过拟合，采用交叉验证，验证集占训练集20%，固定随机种子（random_state)
         # random_state：是随机数的种子。
         # data[:, :2] ：取第3列的值， data[2:,3] ：取第3行 第4列，[:, :]：读取所有的值
-        x_train, x_test, y_train, y_test = train_test_split(self.data[:, :2], self.data[:, 2], test_size=0.0)
+        x_train, x_test, y_train, y_test = train_test_split(
+            self.data[:, :2], self.data[:, 2], test_size=0.0)
 
-        x = (sparse.csc_matrix((y_train, x_train.T)).astype(float))[:, :].todense()
+        x = sparse.csc_matrix((y_train,x_train.T))
 
         self.item_likeness = np.zeros((self.nItem, self.nItem))
 
@@ -58,9 +60,9 @@ class recommend:
             item = self.item_likeness[t].argsort()[-3:]  #取后三列
 
             # t = t if t > 0  else 1
-            p1 = item[0] #if item[0] > 0 else 1
-            p2 = item[1] #if item[1] > 0 else 1
-            p3 = item[2] #if item[2] > 0 else 1
+            p1 = item[0]  #if item[0] > 0 else 1
+            p2 = item[1]  #if item[1] > 0 else 1
+            p3 = item[2]  #if item[2] > 0 else 1
 
             print("购买了商品 %d 的用户，推荐购买商品 %d,%d,%d " % (t, p1, p2, p3))
 

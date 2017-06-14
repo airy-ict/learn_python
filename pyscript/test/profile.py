@@ -117,3 +117,4 @@ for key, items in groupby(somedata, lambda x: x[1]):
         print((u,p,c))
         rc+=c
     print(somedata[0][0],key, rc)
+
