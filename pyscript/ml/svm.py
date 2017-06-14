@@ -4,6 +4,7 @@ import scipy as sp
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+from scipy.sparse.linalg import svds
 
 plt.rcParams['font.sans-serif'] = ['SimHei']  #指定默认字体  
 plt.rcParams['axes.unicode_minus'] = False  #解决保存图像是负号'-'显示为方块的问题  
@@ -36,11 +37,10 @@ def main():
         'LinearSVC (linear kernel)', 'SVC with polynomial (degree 3) kernel',
         'SVC with RBF kernel', 'SVC with Sigmoid kernel'
     ]
-    clf_linear = svm.SVC(kernel='linear').fit(x, y)
-    #clf_linear  = svm.LinearSVC().fit(x, y)  
-    clf_poly = svm.SVC(kernel='poly', degree=3).fit(x, y)
-    clf_rbf = svm.SVC().fit(x, y)
-    clf_sigmoid = svm.SVC(kernel='sigmoid').fit(x, y)
+    clf_linear = svm.SVC(kernel='linear').fit(x, y)          # 线性函数
+    clf_poly = svm.SVC(kernel='poly', degree=3).fit(x, y)    # 多项式函数
+    clf_rbf = svm.SVC().fit(x, y)                            # 径向基函数 
+    clf_sigmoid = svm.SVC(kernel='sigmoid').fit(x, y)        # Sigmoid函数
 
     for i, clf in enumerate((clf_linear, clf_poly, clf_rbf, clf_sigmoid)):
         answer = clf.predict(np.c_[xx.ravel(), yy.ravel()])
@@ -69,6 +69,20 @@ def main():
 
     plt.show()
 
+    print("\n")
+
+    svd(x_train)
+
+def svd(train_data_matrix):
+    print(train_data_matrix.shape)
+    
+    u, s, vt = svds(train_data_matrix, k = 5)
+    s_diag_matrix=np.diag(s)
+    X_pred = np.dot(np.dot(u, s_diag_matrix), vt)
+ 
+    print ('User-based CF MSE: ',str(rmse(X_pred, test_data_matrix)))
+
 
 if __name__ == '__main__':
     main()
+ 
