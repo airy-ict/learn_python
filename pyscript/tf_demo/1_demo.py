@@ -12,9 +12,9 @@ with graph.as_default():
 print(result)  # 没有运算，输出：Tensor("add:0", shape=(), dtype=int32)
 
 with tf.Session(graph=graph) as sess:
+    writer = tf.summary.FileWriter("logs/1/", sess.graph)  
     sess.run(initial)
     res=sess.run(result)
 
-print(res)
 
 
