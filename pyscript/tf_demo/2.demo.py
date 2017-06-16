@@ -10,7 +10,10 @@ def add_layer(inputs, in_size, out_size, n_layer, activation_function=None):
     layer_name = 'layer%s' % n_layer  
     with tf.name_scope(layer_name):  
         with tf.name_scope('weights'):  
+            # tf.random_normal是随机生成一个正态分布的tensor，其shape是第一个参数，stddev是其标准差。
+            # tf.zeros是生成一个全零的tensor。之后将这个tensor的值赋值给Variable。
             Weights = tf.Variable(tf.random_normal([in_size, out_size]), name='W')  
+            # histogram 直方图
             tf.summary.histogram(layer_name + '/weights', Weights)  
         with tf.name_scope('biases'):  
             biases = tf.Variable(tf.zeros([1, out_size]) + 0.1, name='b')  
@@ -48,12 +51,13 @@ with tf.name_scope('loss'):
 
 # 训练
 with tf.name_scope('train'):  
+    # 使用了梯度下降算法（GradientDescentOptimizer）最小化损失函数
     train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)  
   
 sess = tf.Session()  
 merged = tf.summary.merge_all(key='summaries') 
 writer = tf.summary.FileWriter("logs/2/", sess.graph)  
-# 运算初始化
+# 运算初始化 global_variables_initializer会初始化所有的Variable
 sess.run(tf.global_variables_initializer())  
   
 for i in range(1000):  
