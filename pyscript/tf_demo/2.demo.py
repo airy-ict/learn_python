@@ -54,7 +54,7 @@ sess = tf.Session()
 merged = tf.summary.merge_all(key='summaries') 
 writer = tf.summary.FileWriter("logs/2/", sess.graph)  
 # 运算初始化
-sess.run(tf.initialize_all_variables())  
+sess.run(tf.global_variables_initializer())  
   
 for i in range(1000):  
     # 运算
