@@ -53,10 +53,11 @@ with tf.name_scope('train'):
 sess = tf.Session()  
 merged = tf.summary.merge_all(key='summaries') 
 writer = tf.summary.FileWriter("logs/2/", sess.graph)  
-# 运算
+# 运算初始化
 sess.run(tf.initialize_all_variables())  
   
 for i in range(1000):  
+    # 运算
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})  
     if i % 50 == 0:  
         result = sess.run(merged, feed_dict={xs: x_data, ys: y_data})  
