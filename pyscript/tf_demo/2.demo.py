@@ -1,9 +1,7 @@
-""" 
-Please note, this code is only for python 3+. If you are using python 2+, please modify the code accordingly. 
-"""  
+#!/usr/bin/env python3
+
 import tensorflow as tf  
 import numpy as np  
-  
   
 def add_layer(inputs, in_size, out_size, n_layer, activation_function=None):  
     # 添加一层并返回该层的输出
