@@ -52,7 +52,6 @@ def main():
 
     # 特征名称
     # print(count_vec.get_feature_names())
-
     # 保存模型
     curr_path = os.getcwd()
     model_path = curr_path + "\models\clf_bayes.model"

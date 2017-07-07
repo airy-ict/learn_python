@@ -129,16 +129,8 @@ norms = np.array([np.sqrt(np.diagonal(similarity_deep))])
 similarity_deep = (similarity_deep / (norms * norms.T))
 
 #显示推荐结果
-from IPython.display import Image
-from IPython.display import display
-from IPython.display import HTML
-
 n_display = 5
 base_mv_idx = 0
 mv = [x for x in np.argsort(similarity_deep[base_mv_idx])[:-n_display - 1:-1]]
-
-images = ''
-
 for i in range(len(mv)):
-
 	print(str(mv[i])+".jpg")
